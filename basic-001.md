@@ -250,7 +250,7 @@ func main()  {
 ### 8. 方法指针传递
 
 #### 问题: 代码输出什么? 
-
+[代码](src/basic-c0008)
 ```go
 package main
 
@@ -294,7 +294,7 @@ func main() {
 ### 9. 切片截取问题
 
 #### 问题: 代码输出什么? 
-
+[代码](src/basic-c0009)
 ```go
 package main
 
@@ -313,3 +313,48 @@ func main() {
 
 ### 解析:
 > _ = x[6:] 在截取符号 [i:j]，如果 j 省略，默认是原切片或者数组的长度,即len(x)，x 的长度是 2，小于起始下标 6 ，所以 panic。
+
+### 空struct内存对齐
+
+#### 问题: 代码输出什么? 
+
+```go
+package main
+
+import (
+	"fmt"
+	"unsafe"
+)
+
+type demo0 struct {
+	b int32
+	c int32
+	a struct{}
+}
+
+type demo1 struct {
+	a struct{}
+	b int32
+	c int32
+}
+
+type demo2 struct {
+	b int32
+	a struct{}
+	c int32
+}
+
+func main() {
+	fmt.Println(unsafe.Sizeof(demo0{}), unsafe.Sizeof(demo1{}), unsafe.Sizeof(demo2{}))
+}
+```
+
+#### 解答: 
+```text
+ 12 8 8 
+```
+
+### 解析:
+> 空 `struct{}` 大小为 0，作为其他 struct 的字段时，一般不需要内存对齐。  
+> 但是有一种情况除外：即当 `struct{}` 作为结构体最后一个字段时，需要内存对齐。
+> 因为如果有指针指向该字段, 返回的地址将在结构体之外，如果此指针一直存活不释放对应的内存，就会有内存泄露的问题（该内存不因结构体释放而释放）。

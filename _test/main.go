@@ -1,18 +1,9 @@
 package main
 
-import (
-	"log"
-)
+import "fmt"
 
 func main() {
-
-	var x int
-
-	inc := func() int {
-		x++
-		return x
-	}
-	log.Println(func() (int, int) {
-		return inc(), inc()
-	}())
+	s := []int{1, 2}
+	s = append(s, 4, 5, 6)
+	fmt.Printf("len=%d, cap=%d", len(s), cap(s))
 }
