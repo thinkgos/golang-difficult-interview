@@ -5,7 +5,7 @@
 ### 1. len内置函数
 
 #### 问题: 代码输出什么? [原文](https://mp.weixin.qq.com/s?__biz=MzAxMTA4Njc0OQ==&mid=2651442060&idx=2&sn=29a3f39ec2d95d6b5177e53277c5f94c&chksm=80bb157eb7cc9c68f9b2574cb259678580b194cf20d83d84840818bae9712fe3e0246e249a97&mpshare=1&scene=24&srcid=1130fgz3Kg9VvJpRLR3OLUVS&sharer_sharetime=1606715319571&sharer_shareid=fbafc624aa53cd09857fb0861ac2a16d&exportkey=AZIxDLHvvkwjXPkmuEeWCtI%3D&pass_ticket=xSGb7TkoIuLZz7AFBdlYeR4qEQC4h9uTHgeYZjnzNlVCg1RDSSP3MJjeOxdI2wvs&wx_header=0#rd)
-[代码](src/hard-c0001)
+[代码](src/go-hard-c0001)
 ```go
 package main
 
@@ -46,7 +46,7 @@ func main() {
 ### 2. 补码
 
 #### 问题: 代码输出什么? [原文](https://mp.weixin.qq.com/s?__biz=MzAxMTA4Njc0OQ==&mid=2651442141&idx=2&sn=1e565dd411fb82584a7093f40a750be2&chksm=80bb152fb7cc9c390add4b13d217984bd3334ea9bbb1b45357c6d979b9d37499fb8cf9e26004&mpshare=1&scene=24&srcid=1130xlWjBiMct2BMLtmpjm5S&sharer_sharetime=1606715340255&sharer_shareid=fbafc624aa53cd09857fb0861ac2a16d&exportkey=Aa%2Fz3pSgi%2B5meJijFHg1ppE%3D&pass_ticket=xSGb7TkoIuLZz7AFBdlYeR4qEQC4h9uTHgeYZjnzNlVCg1RDSSP3MJjeOxdI2wvs&wx_header=0#rd)
-[代码](src/hard-c0002)
+[代码](src/go-hard-c0002)
 ```go
 package main
 
@@ -81,3 +81,18 @@ func main() {
 
 ### 解析:
 > const隐式转换不允许溢出,所以编译错误
+
+### 3.
+
+#### 问题: 代码输出什么? 
+
+```go
+
+```
+
+#### 解答: 
+```text
+
+```
+
+### 解析:

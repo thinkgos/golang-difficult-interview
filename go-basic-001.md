@@ -5,7 +5,7 @@
 ### 1. `defer` 和 `panic` 
 
 #### 问题: 代码输出什么?  
-[代码](src/basic-c0001)
+[代码](src/go-basic-c0001)
 
 ```go
 package main
@@ -38,7 +38,7 @@ panic: 触发异常
 ### 2. `array`和`slice`
 
 #### 问题: 以下代码只注释掉 ② 输出什么？如果只注释 ① 又输出什么?  
-[代码](src/basic-c0002)
+[代码](src/go-basic-c0002)
 
 ```go
 package main
@@ -82,7 +82,7 @@ func main() {
 ### 3. nil的chan
 
 #### 问题: 代码输出什么? 
-[代码](src/basic-c0003)
+[代码](src/go-basic-c0003)
 ```go
 package main
 
@@ -113,7 +113,7 @@ func main() {
 ### 4. 传值共享slice
 
 #### 问题: 代码输出什么? 
-[代码](src/basic-c0004)
+[代码](src/go-basic-c0004)
 ```go
 package main
 
@@ -146,7 +146,7 @@ func main() {
 ### 5. 不可寻址的临时变量
 
 #### 问题: 代码输出什么? 
-[代码](src/basic-c0005)
+[代码](src/go-basic-c0005)
 ```go
 package main
 
@@ -176,7 +176,7 @@ func main() {
 ### 6. 切片截取问题
 
 #### 问题: 代码输出什么? 
-[代码](src/basic-c0006)
+[代码](src/go-basic-c0006)
 ```go
 package main
 
@@ -205,7 +205,7 @@ func main() {
 ### 7. 方法值传递
 
 #### 问题: 代码输出什么? 
-[代码](src/basic-c0007)
+[代码](src/go-basic-c0007)
 ```go
 package main
 
@@ -250,7 +250,7 @@ func main()  {
 ### 8. 方法指针传递
 
 #### 问题: 代码输出什么? 
-[代码](src/basic-c0008)
+[代码](src/go-basic-c0008)
 ```go
 package main
 
@@ -294,7 +294,7 @@ func main() {
 ### 9. 切片截取问题
 
 #### 问题: 代码输出什么? 
-[代码](src/basic-c0009)
+[代码](src/go-basic-c0009)
 ```go
 package main
 
