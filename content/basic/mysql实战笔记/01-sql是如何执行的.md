@@ -1,3 +1,7 @@
+[TOC]
+
+
+
 # sql是如何执行的
 
 ## MySQL 的逻辑架构图
@@ -11,19 +15,17 @@
 
 ## 日志模块
 
-- InnoDB 引擎的`redo log`,物理日志,固定大小文件(一组4个文件,每个文件的大小是1GB),循环写的,可配置,当发生日志满时,将发生写盘事件. 保证服务器发生异常重启,还能保证记录不丢失,**crash-safe**能力
+- InnoDB 引擎的`redo log`,物理日志,固定大小文件(一组`4`个文件,每个文件的大小是`1GB`),循环写的,可配置,当发生日志满时,将发生写盘事件. 保证服务器发生异常重启,还能保证记录不丢失,**crash-safe**能力
 - Server层日志`binlog`(归档日志).逻辑日记,追加写入的.
-
-
 
 ## 事务隔离
 
 #### 隔离性与隔离级别(ACID)
 
-- Atomicity 原子性
-- Consistency 一致性
-- Isolation 隔离性
-- Durability 持久性
+- `Atomicity` 原子性
+- `Consistency` 一致性
+- `Isolation` 隔离性
+- `Durability` 持久性
 
 问题: **脏读,不可重复读,幻读**
 
