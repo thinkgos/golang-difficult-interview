@@ -104,3 +104,4 @@ git submodule update --remote yoursubmodule
  git submodule update --init --recursive
 ```
 
+![git command](asserts/git_command.png)
