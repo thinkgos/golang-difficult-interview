@@ -63,11 +63,7 @@
 > - [译文 - Go 高级并发](https://mp.weixin.qq.com/s?__biz=MzA4ODg0NDkzOA==&mid=2247487782&idx=1&sn=7dd6134073b75e226f19f9586a5cc430&chksm=9022aec3a75527d5511e2af98026074c61ef52093339d2e0f43159f5eb41f4db50ed8523b9bd&mpshare=1&scene=24&srcid=0429ILG6qj9iodwnNrkMS7Or&sharer_sharetime=1588172711436&sharer_shareid=fbafc624aa53cd09857fb0861ac2a16d&exportkey=AVBkAkzF5TwXF9RaQIygd0g%3D&pass_ticket=edom3%2BQWJv2%2F6ag8wwGj83w98nQSUN8ex7sdZB89cFp%2FbMiUGbmDvKeH%2BLBfXRK2#rd)
 
 15. goroutine的泄露如何排查？pprof了解吗，说一下.
-> - [值得收藏深度解密系列：Go语言之 pprof](https://mp.weixin.qq.com/s?__biz=MzAxMTA4Njc0OQ==&mid=2651438010&idx=5&sn=9641a1dcc64b4d7b6b228c54b3da9834&chksm=80bb6548b7ccec5ef4760cfe32599568c133d97a311c0eab113f14ceecaeaa3f53a07dc0f488&mpshare=1&scene=24&srcid=&sharer_sharetime=1593169627588&sharer_shareid=fbafc624aa53cd09857fb0861ac2a16d&exportkey=AR4ME0Tlj8P7jxFrwP7KfPs%3D&pass_ticket=DDvVwMc9uE8gubEQ4Udh%2F7K9IzRY%2FCbcirMDYkaFdBlrl2%2B2VHn%2BmCXuaTNKOfGb#rd)  
-> - [一文读懂 Go profiling 和性能优化](https://mp.weixin.qq.com/s?__biz=MzAxMTA4Njc0OQ==&mid=2651437687&idx=1&sn=4b566ac643e64a10c50f8507e8cc86e4&chksm=80bb6485b7cced9315ca0a28f0b2bd68efa8b007f4dca282d630022979974bed639316578ada&mpshare=1&scene=24&srcid=&sharer_sharetime=1593173883464&sharer_shareid=fbafc624aa53cd09857fb0861ac2a16d&exportkey=AS%2BggBzIwlXEpwoFxwrcmjo%3D&pass_ticket=DDvVwMc9uE8gubEQ4Udh%2F7K9IzRY%2FCbcirMDYkaFdBlrl2%2B2VHn%2BmCXuaTNKOfGb#rd)  
-> - [GCTT 出品 | SRE: 性能分析: 一个 Go 编写的简单 HTTP Web 服务器的优化方法](https://mp.weixin.qq.com/s?__biz=MzAxMTA4Njc0OQ==&mid=2651436809&idx=1&sn=c307d7a01a7dba5df309d1a0c55a85b2&chksm=80bb69fbb7cce0edb0d103a3b4c18d1b9b3bf0919e918ceb83b52999b1f01f51ff6e15ea96e5&mpshare=1&scene=24&srcid=&sharer_sharetime=1593179123736&sharer_shareid=fbafc624aa53cd09857fb0861ac2a16d&exportkey=AYowzeZPWq2OOIAj3uA89BM%3D&pass_ticket=DDvVwMc9uE8gubEQ4Udh%2F7K9IzRY%2FCbcirMDYkaFdBlrl2%2B2VHn%2BmCXuaTNKOfGb#rd)  
-> - [Go语言 CPU 性能、内存分析调试方法大汇总：你要的都在这](https://mp.weixin.qq.com/s?__biz=MzAxMTA4Njc0OQ==&mid=2651439006&idx=1&sn=0db8849336cc4172c663a574212ea8db&chksm=80bb616cb7cce87a1dc529e6c8bdcf770e293fc4ce67ede8e1908199480534c39f79803038e3&mpshare=1&scene=1&srcid=&sharer_sharetime=1585540493046&sharer_shareid=5e336786609e78d9ce323535f372f069&exportkey=AUB0ik%2FnnB8DEsYzOrZ2mrQ%3D&pass_ticket=edom3%2BQWJv2%2F6ag8wwGj83w98nQSUN8ex7sdZB89cFp%2FbMiUGbmDvKeH%2BLBfXRK2#rd)
-
+> [pprof](pprof.md)
 16. Gin
     - Gin的中间件是如何实现的
     - Gin的一次请求整个过程是如何调用的

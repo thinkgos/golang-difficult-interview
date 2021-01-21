@@ -7,7 +7,7 @@ func main() {
 	println(b)
 
 	// 题2
-	const c int8 = -1
-	var d int8 = -128 / c
-	println(d)
+	// const c int8 = -1
+	// var d int8 = -128 / c
+	// println(d)
 }

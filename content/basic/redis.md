@@ -1,0 +1,3 @@
+# redis
+
+- [万字长文的Redis五种数据结构详解(理论+实战)](https://mp.weixin.qq.com/s?__biz=MzI1MTQ4MDAyMg==&mid=2247489398&idx=4&sn=85f34bf5c119f83f265df94b83c4580a&chksm=e9f305cfde848cd9f2af811ed7a5f5c152fb9f56dff518f227fb2397f03803c8cb40cd710c43&mpshare=1&scene=24&srcid=&sharer_sharetime=1592726807599&sharer_shareid=fbafc624aa53cd09857fb0861ac2a16d&exportkey=Aa1V6qIBkSh1q7VnM1jN4fM%3D&pass_ticket=JHHuXYVoiccTTs1ne62nXMRMpnogIIcB0kUSRdpmlMFWSUL1aXUGL8F6ATfm4cju&wx_header=0#rd)
