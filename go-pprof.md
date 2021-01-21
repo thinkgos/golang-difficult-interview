@@ -2,10 +2,11 @@
 
 # pprof
 
-- [值得收藏深度解密系列：Go语言之 pprof](https://mp.weixin.qq.com/s?__biz=MzAxMTA4Njc0OQ==&mid=2651438010&idx=5&sn=9641a1dcc64b4d7b6b228c54b3da9834&chksm=80bb6548b7ccec5ef4760cfe32599568c133d97a311c0eab113f14ceecaeaa3f53a07dc0f488&mpshare=1&scene=24&srcid=&sharer_sharetime=1593169627588&sharer_shareid=fbafc624aa53cd09857fb0861ac2a16d&exportkey=AR4ME0Tlj8P7jxFrwP7KfPs%3D&pass_ticket=DDvVwMc9uE8gubEQ4Udh%2F7K9IzRY%2FCbcirMDYkaFdBlrl2%2B2VHn%2BmCXuaTNKOfGb#rd)  
+- [值得收藏深度解密系列：Go语言之 pprof](https://mp.weixin.qq.com/s?__biz=MzAxMTA4Njc0OQ==&mid=2651438010&idx=5&sn=9641a1dcc64b4d7b6b228c54b3da9834&chksm=80bb6548b7ccec5ef4760cfe32599568c133d97a311c0eab113f14ceecaeaa3f53a07dc0f488&mpshare=1&scene=24&srcid=&sharer_sharetime=1593169627588&sharer_shareid=fbafc624aa53cd09857fb0861ac2a16d&exportkey=AR4ME0Tlj8P7jxFrwP7KfPs%3D&pass_ticket=DDvVwMc9uE8gubEQ4Udh%2F7K9IzRY%2FCbcirMDYkaFdBlrl2%2B2VHn%2BmCXuaTNKOfGb#rd) 
+- [Go 大杀器之性能剖析 PProf](https://eddycjy.com/posts/go/tools/2018-09-15-go-tool-pprof/)
 - [golang调试分析的高阶技巧](https://mp.weixin.qq.com/s?__biz=MzU2MDcwNTg3OA==&mid=2247484104&idx=1&sn=082bfb51db063d80aaa1ff2fb05bcae1&chksm=fc02baf1cb7533e767bc7c39dcc4178157dc36ad62efc90c0e084d2f13f86b571a00bbff0a8e&mpshare=1&scene=24&srcid=07181IGjRYzThZJUEEOyuDjJ&sharer_sharetime=1595066004396&sharer_shareid=fbafc624aa53cd09857fb0861ac2a16d&exportkey=AUTW9nFz6go6dtpGga0XpXM%3D&pass_ticket=JHHuXYVoiccTTs1ne62nXMRMpnogIIcB0kUSRdpmlMFWSUL1aXUGL8F6ATfm4cju&wx_header=0#rd)
 - [图解Go pprof收集数据的工作流](https://mp.weixin.qq.com/s?__biz=MzAxMTA4Njc0OQ==&mid=2651444315&idx=2&sn=f751f0b06d31a323e56763234d81a8c8&chksm=80bb0aa9b7cc83bfe3cb9a602dcab23bfb2bdcd936732217a2fe794438237f528fa6097070ab&mpshare=1&scene=1&srcid=0116blIlynMiFyXhbb4G7VUF&sharer_sharetime=1611190748128&sharer_shareid=fbafc624aa53cd09857fb0861ac2a16d&exportkey=AXpuvHRIz0m9AxXdOVbyJ%2BY%3D&pass_ticket=JHHuXYVoiccTTs1ne62nXMRMpnogIIcB0kUSRdpmlMFWSUL1aXUGL8F6ATfm4cju&wx_header=0#rd)
-- [Go语言 CPU 性能、内存分析调试方法大汇总：你要的都在这](https://mp.weixin.qq.com/s?__biz=MzAxMTA4Njc0OQ==&mid=2651439006&idx=1&sn=0db8849336cc4172c663a574212ea8db&chksm=80bb616cb7cce87a1dc529e6c8bdcf770e293fc4ce67ede8e1908199480534c39f79803038e3&mpshare=1&scene=1&srcid=&sharer_sharetime=1585540493046&sharer_shareid=5e336786609e78d9ce323535f372f069&exportkey=AUB0ik%2FnnB8DEsYzOrZ2mrQ%3D&pass_ticket=edom3%2BQWJv2%2F6ag8wwGj83w98nQSUN8ex7sdZB89cFp%2FbMiUGbmDvKeH%2BLBfXRK2#rd)
+- [Go语言 CPU 性能、内存分析调试方法大汇总](https://mp.weixin.qq.com/s?__biz=MzAxMTA4Njc0OQ==&mid=2651439006&idx=1&sn=0db8849336cc4172c663a574212ea8db&chksm=80bb616cb7cce87a1dc529e6c8bdcf770e293fc4ce67ede8e1908199480534c39f79803038e3&mpshare=1&scene=1&srcid=&sharer_sharetime=1585540493046&sharer_shareid=5e336786609e78d9ce323535f372f069&exportkey=AUB0ik%2FnnB8DEsYzOrZ2mrQ%3D&pass_ticket=edom3%2BQWJv2%2F6ag8wwGj83w98nQSUN8ex7sdZB89cFp%2FbMiUGbmDvKeH%2BLBfXRK2#rd)
 
 pprof 支持四种类型的分析：
 
@@ -46,7 +47,7 @@ pprof 支持四种类型的分析：
   > `http://localhost:8080/debug/pprof/`进入浏览器页面,查看相关的汇总信息
 
 ### a. 分析
-
+example: [example](src/pprof/pprof.go)
 - 通过命令交互分析
 
   - 下载得到profile文件直接分析
