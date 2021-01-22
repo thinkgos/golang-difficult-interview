@@ -6,7 +6,7 @@
 
 ## MySQL 的逻辑架构图
 
-![MySQL 的逻辑架构图](./asserts/sql_process.png)
+![MySQL 的逻辑架构图](asserts/sql_process.png)
 
 - Server层:包括**连接器**、**查询缓存**、**分析器**、**优化器**、**执行器**等，涵盖 MySQL 的大多数核心服务功能，以及所有的内置函数（如日期、时间、数学和加密函数等），所有跨存储引擎的功能都在这一层实现，比如存储过程、触发器、视图等
 - 存储引擎层:**负责数据的存储和提取**。其架构模式是插件式的，支持 InnoDB、MyISAM、Memory 等多个存储引擎。现在最常用的存储引擎是 InnoDB，它从 MySQL 5.5.5 版本开始成为了默认存储引擎.
@@ -38,7 +38,7 @@ SQL 标准的事务隔离级别包括：读未提交（read uncommitted）、读
 
 
 
-![事务](./asserts/shiwu.png)
+![事务](asserts/shiwu.png)
 
 
 

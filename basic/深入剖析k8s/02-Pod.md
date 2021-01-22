@@ -45,8 +45,6 @@ spec:
         args: ["-c", "echo Hello from the debian container > /Pod-data/index.html"]
 ```
 
-
-
 ## 二. Projected Volume
 
 - Secret；
