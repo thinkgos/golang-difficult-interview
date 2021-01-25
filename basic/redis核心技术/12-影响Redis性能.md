@@ -55,9 +55,11 @@ Redis 主线程的运行时信息需要被重新加载到另一个 CPU 核上，
 
 我们尝试着把 Redis 实例和 CPU 核绑定了，让一个 Redis 实例固定运行在一个 CPU 核上
 
-
-
 ## 三. Redis 关键系统配置
+
+> 该命令会打印 120 秒内监测到的最大延迟.
+>
+> `./redis-cli --intrinsic-latency 120` 
 
 ## 四. Redis 内存碎片
 
