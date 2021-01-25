@@ -1,6 +1,6 @@
 # 1. iptables 
 
->  参考文章 [iptables详解](http://www.zsythink.net/archives/tag/iptables/page/2/)
+>  参考文章 [iptables详解](http://www.zsythink.net/archives/tag/iptables/page/2/) [备链](https://blog.csdn.net/weixin_33749242/article/details/91718539)
 
 `iptables`其实不是真正的防火墙,我们可以把它理解成一个客户端代理,用户通过`iptables`这个代理,将用户的安全设定执行到对应的"安全框架"中,这个"安全框架"才是真正的防火墙,这个框架的名字叫`netfilter`.
 
@@ -18,62 +18,65 @@
 
 ## 1.1 iptables基础
 
-   ` iptables`是按照规则来办事的,所谓规则一般的定义为"如果数据包头符合这样的条件,就这样处理这个数据包".规则存储在内核空间的信息包过滤表中,这些规则分别指定了*源地址*、*目的地址*、*传输协议(如TCP、UDP、ICMP)*和*服务类型(如HTTP、FTP和SMTP)*等.当数据包与规则匹配时,iptables就根据规则所定义的方法来处理这些数据包,如放行(accept)、拒绝(reject)和丢弃(drop)等.配置防火墙的主要工作就是添加、修改和删除这些规则.
+   ` iptables`是按照规则来办事的,所谓规则一般的定义为:
 
-`iptables`配置的通常就是所说的四表五链.
-
-四表: (另外`security`表不常用,主要用于数据包上应用SELniux)
-
-- `filter` 负责过滤功能,防火墙；内核模块：iptables_filter
-- `raw`network address translation,网络地址转换功能；内核模块：iptable_nat
-- `NAT`拆解报文,做出修改,并重新封装 的功能；iptable_mangle
-- `mangle`关闭nat表上启用的连接追踪机制；iptable_raw
-
-> 这5张表的优先级从高到低是：`raw` -> `mangle`  ->  `nat` -> `filter`  -> `security`
+> "如果数据包头符合这样的条件,就这样处理这个数据包".规则存储在内核空间的信息包过滤表中,这些规则分别指定了***源地址***、***目的地址***、***传输协议(如TCP、UDP、ICMP)***和***服务类型(如HTTP、FTP和SMTP)***等.
 >
-> 需要注意的是，iptables不支持用户自定义表,但支持自定义链.
+> 当数据包与规则匹配时,`iptables`就根据规则所定义的方法来处理这些数据包,如**放行(accept)**、**拒绝(reject)**和**丢弃(drop)**等.
+>
+> 配置防火墙的主要工作就是添加、修改和删除这些规则.
 
-五链(标记表的执行优先级次序):  
+`iptables`配置的通常就是所说的**四表五链**.
+
+四表: (另外`security`表不常用,主要用于数据包上应用**SELniux**)
+
+- `raw`: 关闭nat表上启用的连接追踪机制; iptable_raw 
+- `mangle`: 拆解报文，做出修改，并重新封装 的功能；iptable_mangle 
+- `NAT`:  network address translation,网络地址转换功能；；iptable_nat
+- `filter`:  负责过滤功能,防火墙；内核模块：iptables_filter
+
+> 这5张表的优先级从高到低是：`raw` -> `mangle`  ->  `nat` -> `filter`  [-> `security`]
+>
+> > 需要注意的是，`iptables`**不支持用户自定义表**,但**支持自定义链**.
+
+**五链**(标记表的执行优先级次序):  
 
 - `PREROUTING`: `raw` -->` mangle`--> `nat`
 - `FORWARD`: `mangle`- -> `filter`
 - `POSTROUTING`: `mangle` --> `nat`
--  `INPUT`:  `mangle` --> `filter`(centos7中还有nat表,centos6中没有).
+-  `INPUT`:  `mangle` --> `filter`(centos7中还有`nat`表,centos6中没有).
 - `OUPUT`: `raw`--> `mangle` --> `nat` --> `filter`
 
 以上看出各个链有对应的表,而且表和表上的规则是有优先级的,**在实际操作使用时,往往是通过操作`iptables`这些表,对规则进行定义的.**
 
-
-
 ![](asserts/iptable-1.png)
-
-
 
 ## 1.2 规则概念
 
 根据指定的匹配条件来尝试匹配每个流经此处的报文,一旦匹配成功,则由规则后面指定的处理动作(target)进行处理.如果不匹配将顺延匹配下一条.
 
-### 匹配条件
+### a. 匹配条件
 
-​		匹配条件分为*基本匹配条件*与*扩展匹配条件*
+​		匹配条件分为***基本匹配条件***与***扩展匹配条件***
 
 **基本匹配条件：**
 
-​		源地址Source IP,目标地址 Destination IP
-
-​		上述内容都可以作为基本匹配条件.
+- 源地址 Source IP
+- 目标地址 Destination IP
 
 **扩展匹配条件：**
 
-​		除了上述的条件可以用于匹配,还有很多其他的条件可以用于匹配,这些条件泛称为扩展条件,这些扩展条件其实也是`netfilter`中的一部分,只是以模块的形式存在,如果想要使用这些条件,则需要依赖对应的扩展模块.
+​		除了上述的条件可以用于匹配,还有很多其他的条件可以用于匹配,这些条件泛称为***扩展条件***,这些扩展条件其实也是`netfilter`中的一部分,只是以模块的形式存在,如果想要使用这些条件,则需要依赖对应的扩展模块.
 
-​		源端口Source Port, 目标端口Destination Port
+- 源端口Source Port
 
-​		上述内容都可以作为扩展匹配条件
+- 目标端口Destination Port
 
-### **处理动作**
+### b. **处理动作**
 
-​		处理动作在`iptables`中被称为target(这样说并不准确,我们暂且这样称呼),动作也可以分为*基本动作*和*扩展动作*.
+​		处理动作在`iptables`中被称为target(这样说并不准确,我们暂且这样称呼),
+
+​		动作也可以分为***基本动作***和***扩展动作***.
 
 此处列出一些常用的动作：
 
@@ -148,7 +151,7 @@ num   pkts bytes target     prot opt in     out     source               destina
 
 ## 2.2 规则管理
 
-### 规则的增删改
+### a. 规则的增删改
 
 ```shell
 # 添加一条规则,表示在filter表的INPUT链追加一条丢弃来自192.168.1.111的规则
@@ -173,7 +176,7 @@ $ iptables -t filter -F input
 $ iptables -t filter -R INPUT 1 -s 192.168.1.111 -j REJECT 
 ```
 
-### 保存规则
+### b. 保存规则
 
 在默认的情况下,我们对"防火墙"所做出的修改都是"临时的",换句话说就是,当重启`iptables`服务或者重启服务器以后,我们平常添加的规则或者对规则所做出的修改都将消失,为了防止这种情况的发生,我们需要将规则"保存"
 
@@ -263,7 +266,7 @@ $ iptables -t filter -I INPUT -s 192.168.1.111 -d 192.168.1.120 -j DROP
 
 - 常用扩展匹配模块
 
-  - iprange扩展模块
+  - `iprange`扩展模块
 
   > 使用`-s`选项或者`-d`选项即可匹配报文的源地址与目标地址,而且在指定IP地址时,可以同时指定多个IP地址,每个IP用"逗号"隔开,但是,`-s`选项与`-d`选项并不能一次性的指定一段连续的IP地址范围,
   >

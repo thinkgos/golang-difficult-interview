@@ -1,4 +1,6 @@
-# dockerfile
+[TOC]
+
+# Dockerfile
 
 Docker 可以通过 `Dockerfile` 的内容来自动构建镜像.
 - 每条保留字指令都必须为大写字母且后面要跟至少一个参数（即不能只写关键字然后不跟参数）
@@ -9,8 +11,9 @@ Docker 可以通过 `Dockerfile` 的内容来自动构建镜像.
 `Dockerfile` 是一个包含创建镜像所有命令的文本文件，通过docker build命令可以根据 `Dockerfile` 的内容构建镜像，在介绍如何构建之前先介绍下 `Dockerfile` 的基本语法结构。
 `Dockerfile` 有以下指令选项:
 
-| #          | 注释                                          |
+| 指令       | 作用                                          |
 | ---------- | --------------------------------------------- |
+| #          | 注释                                          |
 | FROM       | 基础镜像,当前的镜像是基于哪一个已经存在的镜像 |
 | MAINTAINER | 设置创建镜像的用户                            |
 | LABEL      | 设置镜像的标签                                |
@@ -28,7 +31,7 @@ Docker 可以通过 `Dockerfile` 的内容来自动构建镜像.
 | ONBUILD    | 设置镜像的ONBUILD指令                         |
 | STOPSIGNAL | 设置容器的退出信号量                          |
 
-## **1. FROM**
+## 1. FROM
 
 用法: `FROM <image>` 或者 `FROM <image>[:<tag>]`
 1. `FROM`指定构建镜像的基础源镜像，如果本地没有指定的镜像，则会自动从 Docker 的公共库 pull 镜像下来。
@@ -36,29 +39,29 @@ Docker 可以通过 `Dockerfile` 的内容来自动构建镜像.
 3. `FROM`可以在一个 `Dockerfile` 中出现多次，如果有需求在一个 `Dockerfile` 中创建多个镜像。
 4. 如果`FROM`语句没有指定镜像标签，则默认使用latest标签。
 
-## **2. MAINTAINER**
+## 2. MAINTAINER
 
 用法: `MAINTAINER <name>`, 设置创建镜像的用户
 
-## **3. LABEL**
+## 3. LABEL
 
 用法:`LABEL <key>=<value> <key>=<value>...` 设置镜像的标签
 
-## **4. ARG**
+## 4. ARG
 
 用法: `ARG <name>[=<defaultValue>]`,设置编译变量
 
-## **5. RUN**
+## 5. RUN
 
 用法:  `RUN  "executable", "param1", "param2"`,编译镜像运行的命令
 -   每条`RUN`指令将在当前镜像基础上执行指定命令，并提交为新的镜像，后续的RUN都在之前`RUN`提交后的镜像为基础，镜像是分层的，可以通过一个镜像的任何一个历史提交点来创建，类似源码的版本控制 。
 - exec方式会被解析为一个 JSON 数组，所以必须使用双引号而不是单引号。exec 方式不会调用一个命令 shell，所以也就不会继承相应的变量，如`RUN [ "echo", "$HOME" ]`这种方式是不会达到输出 HOME 变量的，正确的方式应该是用shell方式`RUN [ "sh", "-c", "echo", "$HOME" ]`,`RUN`产生的缓存在下一次构建的时候是不会失效的，会被重用，可以使用--no-cache选项，即`docker build --no-cache`，如此便不会缓存。
 
-## **6. EXPOSE**
+## 6. EXPOSE
 
 `EXPOSE <port> [<port>...]` 告诉 Docker 服务端容器对外映射的本地端口，需要在 docker run 的时候使用-p或者-P选项生效。
 
-## **7. ENV**
+## 7. ENV
 
 用法:
 1. `ENV <key> <value>       # 只能设置一个变量`
@@ -76,7 +79,7 @@ ENV myDog Rex The Dog
 ENV myCat fluffy
 ```
 
-## **8. ADD**
+## 8. ADD
 
 用法: 
 - `ADD <src>... <dest>`
@@ -92,7 +95,7 @@ ADD hom?.txt /mydir/    # ? is replaced with any single character
 - 路径必须是 `Dockerfile` 所在路径的相对路径
 - 如果是一个目录，只会复制目录下的内容，而目录本身则不会被复制
 
-## **9. COPY**
+## 9. COPY
 
 用法: 
 
@@ -101,7 +104,7 @@ ADD hom?.txt /mydir/    # ? is replaced with any single character
 
 `COPY`复制新文件或者目录从 并且添加到容器指定路径中 。用法同`ADD`，唯一的不同是不能指定远程文件 URLS。
 
-## **10. CMD**
+## 10. CMD
 
 `CMD` 有三种使用方式:
 
@@ -116,7 +119,7 @@ ADD hom?.txt /mydir/    # ? is replaced with any single character
 `CMD`会在启动容器的时候执行，build 时不执行，而`RUN`只是在构建镜像的时候执行，后续镜像构建完成之后，启动容器就与RUN无关了，这个初学者容易弄混这个概念，这里简单注解一下。
 
 
-## **11. ENTRYPOINT**
+## 11. ENTRYPOINT
 
 用法: 
 1. shell格式: `ENTRYPOINT  ["executable", "param1", "param2"]`
@@ -156,14 +159,14 @@ ENTRYPOINT top -b
 CMD --ignored-param1 # --ignored-param2 ... --ignored-param3 ... 依此类推
 ```
 
-## **12. VOLUME**
+## 12. VOLUME
 
 用法: `VOLUME ["/data"]`创建一个可以从本地主机或其他容器挂载的挂载点.
 
-## **13. USER**
+## 13. USER
 用法: `USER daemon`指定运行容器时的用户名或 UID，后续的`RUN`、`CMD`、`ENTRYPOINT`也会使用指定用户。
 
-## **14. WORKDIR**
+## 14. WORKDIR
 用法: `WORKDIR /path/to/workdir`
 为后续的`RUN`、`CMD`、`ENTRYPOINT`指令配置工作目录。可以使用多个`WORKDIR`指令，后续命令如果参数是相对路径，则会基于之前命令指定的路径。
 
@@ -182,7 +185,7 @@ ENV DIRPATH /path
 WORKDIR $DIRPATH/$DIRNAME
 # 最终路径则为 `/path/$DIRNAME`
 ```
-## **15. ONBUILD**
+## 15. ONBUILD
 用法: `ONBUILD [INSTRUCTION]`,配置当所创建的镜像作为其它新创建镜像的基础镜像时，所执行的操作指令。
 例如，`Dockerfile` 使用如下的内容创建了镜像 image-A：
 ```dockerfile
@@ -200,17 +203,17 @@ RUN /usr/local/bin/python-build --dir /app/src
 ```
 使用`ONBUILD`指令的镜像，推荐在标签中注明，例如 ruby:1.9-onbuild。
 
-## **16. STOPSIGNAL**
+## 16. STOPSIGNAL
 
 用法: `STOPSIGNAL signal`,设置容器退出时，Docker Daemon向容器发送的信号量 
 
-## **17. HEALTHCHECK**
+## 17. HEALTHCHECK
 
 用法: 
 - `HEALTHCHECK [选项] CMD <命令>` 
 - `HEALTHCHECK NONE`,如果基础镜像有健康检查指令,命名用这行可以屏蔽掉其健康检查指令
 
-## **18. Dockerfile Examples**
+## 18. Dockerfile Examples
 
 ```dockerfile
 # Nginx
@@ -244,7 +247,7 @@ RUN echo moo > oink
 # /oink.
 ```
 
-## **19. docker build**
+## 19. docker build
 ```shell
 $ docker build --help
 Usage: docker build [OPTIONS] PATH | URL | -
@@ -257,7 +260,7 @@ Build a new image from the source code at PATH
 ```
 参考文档: [Dockerfile Reference](https://docs.docker.com/engine/reference/builder/)
 
-## **20. dockerfile 最佳实践**
+## 20. Dockerfile 最佳实践
 1. 使用`.dockerignore`文件
 为了在docker build过程中更快上传和更加高效，应该使用一个`.dockerignore`文件用来排除构建镜像时不需要的文件或目录。例如,除非. Git 在构建过程中需要用到，否则你应该将它添加到`.dockerignore`文件中，这样可以节省很多时间。
 2. 避免安装不必要的软件包
