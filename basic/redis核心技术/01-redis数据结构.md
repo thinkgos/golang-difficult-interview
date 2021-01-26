@@ -42,11 +42,11 @@
 
 ### a. Dict Entry
 
-![dictEntry](/home/thinkgo/go/proj/golang-difficult-interview/content/basic/redis核心技术/asserts/dictEntry.jpg)
+![dictEntry](asserts/dictEntry.jpg)
 
 ### b. Redis Object
 
-![redisObject](/home/thinkgo/go/proj/golang-difficult-interview/content/basic/redis核心技术/asserts/redisObject.jpg)
+![redisObject](asserts/redisObject.jpg)
 
 ![redisobject](asserts/redisobject2.jpg)
 
@@ -71,9 +71,9 @@
 
   - RedisObject数据的编码方式
 
-![encoding](/home/thinkgo/go/proj/golang-difficult-interview/content/basic/redis核心技术/asserts/encoding.jpg)
+![encoding](asserts/encoding.jpg)
 
-![sds](/home/thinkgo/go/proj/golang-difficult-interview/content/basic/redis核心技术/asserts/sds.jpg)
+![sds](asserts/sds.jpg)
 
 - **`len`**：占 4 个字节，表示 buf 的已用长度。
 - **`alloc`**：也占个 4 字节，表示 buf 的实际分配长度，一般大于 len
@@ -114,7 +114,7 @@ ZSet的底层实现是[ziplist](#d. ziplist数据结构)和`skiplist`
 
 ### d. ziplist数据结构
 
-![ziplist](/home/thinkgo/go/proj/golang-difficult-interview/content/basic/redis核心技术/asserts/ziplist.jpg)
+![ziplist](asserts/ziplist.jpg)
 
 - `zlbytes`: 4个字节的大小，记录压缩列表占用内存的字节数
 - `zltail`: 4个字节大小，记录表尾节点距离起始地址的偏移量，用于快速定位到尾节点的地址。
@@ -130,7 +130,8 @@ ZSet的底层实现是[ziplist](#d. ziplist数据结构)和`skiplist`
 
 [Redis容量预估](http://www.redis.cn/redis_memory/)
 
+## Redis思维导图
 
-
+![ziplist](asserts/redis.png)
 
 

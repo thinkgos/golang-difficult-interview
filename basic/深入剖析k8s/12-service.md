@@ -65,7 +65,9 @@ hostnames   10.244.0.5:9376,10.244.0.6:9376,10.244.0.7:9376
 
 >一直以来，基于 iptables 的 `Service` 实现，都是制约 Kubernetes 项目承载更多量级的 `Pod` 的主要障碍。而 IPVS 模式的 `Service`，就是解决这个问题的一个行之有效的方法。
 
-IPVS 模式的工作原理，其实跟 iptables 模式类似。当我们创建了前面的 `Service` 之后，`kube-proxy` 首先会在宿主机上创建一个虚拟网卡（叫作：`kube-ipvs0`），并为它分配 Service VIP 作为 IP 地址,而接下来，`kube-proxy` 就会通过 Linux 的 IPVS 模块，为这个 IP 地址设置三个 IPVS 虚拟主机，并设置这三个虚拟主机之间使用轮询模式 (rr) 来作为负载均衡策略
+IPVS 模式的工作原理，其实跟 iptables 模式类似。
+
+当我们创建了前面的 `Service` 之后，`kube-proxy` 首先会在宿主机上创建一个虚拟网卡（叫作：`kube-ipvs0`），并为它分配 Service VIP 作为 IP 地址,而接下来，`kube-proxy` 就会通过 Linux 的 IPVS 模块，为这个 IP 地址设置三个 IPVS 虚拟主机，并设置这三个虚拟主机之间使用轮询模式 (rr) 来作为负载均衡策略
 
 > 而相比于 iptables，IPVS 在内核中的实现其实也是基于 Netfilter 的 NAT 模式，所以在转发这一层上，理论上 IPVS 并没有显著的性能提升。
 >

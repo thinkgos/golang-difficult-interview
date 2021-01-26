@@ -1,8 +1,15 @@
+[TOC]
+
 # 容器持久化存储
 
->  Persistent Volume(`PV`)和 Persistent Volume Claim(`PVC`）持久化存储体系。
+>  **Persistent Volume**(`PV`)和 **Persistent Volume Claim**(`PVC`）持久化存储体系。
+>
+>  - **`PV` 描述的,是持久化存储数据卷**
+>  - **`PVC` 描述的,则是 `Pod `所希望使用的持久化存储的属性.**
 
-- **`PV` 描述的,是持久化存储数据卷.** `PV` 对象是由运维人员事先创建在 Kubernetes 集群里待用的
+## 一. PV 描述的,是持久化存储数据卷.
+
+`PV` 对象是由运维人员事先创建在 Kubernetes 集群里待用的
 
 ```yaml
 apiVersion: v1
@@ -20,7 +27,9 @@ spec:
     path: "/"
 ```
 
-- **`PVC` 描述的,则是 `Pod `所希望使用的持久化存储的属性.**比如,Volume 存储的大小、可读写权限等等,`PVC` 对象通常由开发人员创建；
+## 二. PVC 描述的,则是 Pod 所希望使用的持久化存储的属性.
+
+比如,Volume 存储的大小、可读写权限等等,`PVC` 对象通常由开发人员创建；
 
 ```yaml
 apiVersion: v1
@@ -68,7 +77,14 @@ spec:
 
 - `PVC` 和 `PV` 的设计,其实跟“面向对象”的思想完全一致。`PVC` 可以理解为持久化存储的“接口”,它提供了对某种持久化存储的描述,但不提供具体的实现；而这个持久化存储的实现部分则由 `PV` 负责完成。
 
-- Dynamic Provisioning 机制工作的核心,在于一个名叫 StorageClass 的 API 对象。而 StorageClass 对象的作用,其实就是创建 `PV` 的模板。
+## 三.  Dynamic Provisioning 
+
+ `Dynamic Provisioning` 机制工作的核心,在于一个名叫 StorageClass 的 API 对象。而 StorageClass 对象的作用,其实就是创建 `PV` 的模板。
+
+StorageClass 对象会定义如下两个部分内容：
+
+- 第一，PV 的属性。比如，存储类型、Volume 的大小等等。
+- 第二，创建这种 PV 需要用到的存储插件。比如，Ceph 等等。
 
 ```yaml
 apiVersion: storage.k8s.io/v1
@@ -116,4 +132,24 @@ spec:
     requests:
       storage: 30Gi
 ```
+
+## 四. PV-PVC 总结
+
+![pv-pvc](asserts/pv-pvc.png)
+
+
+
+- PVC 描述的，是 Pod 想要使用的持久化存储的属性，比如存储的大小、读写权限等。
+- PV 描述的，则是一个具体的 Volume 的属性，比如 Volume 的类型、挂载目录、远程存储服务器地址等。
+- 而 StorageClass 的作用，则是充当 PV 的模板。并且，只有同属于一个 StorageClass 的 PV 和 PVC，才可以绑定在一起
+
+> `StorageClass` 的另一个重要作用，是指定 PV 的 Provisioner（存储插件）。这时候，如果你的存储插件支持 `Dynamic Provisioning` 的话，Kubernetes 就可以自动为你创建 PV 了。
+
+
+
+
+
+
+
+
 
