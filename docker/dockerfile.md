@@ -55,7 +55,7 @@ Docker 可以通过 `Dockerfile` 的内容来自动构建镜像.
 
 用法:  `RUN  "executable", "param1", "param2"`,编译镜像运行的命令
 -   每条`RUN`指令将在当前镜像基础上执行指定命令，并提交为新的镜像，后续的RUN都在之前`RUN`提交后的镜像为基础，镜像是分层的，可以通过一个镜像的任何一个历史提交点来创建，类似源码的版本控制 。
-- exec方式会被解析为一个 JSON 数组，所以必须使用双引号而不是单引号。exec 方式不会调用一个命令 shell，所以也就不会继承相应的变量，如`RUN [ "echo", "$HOME" ]`这种方式是不会达到输出 HOME 变量的，正确的方式应该是用shell方式`RUN [ "sh", "-c", "echo", "$HOME" ]`,`RUN`产生的缓存在下一次构建的时候是不会失效的，会被重用，可以使用--no-cache选项，即`docker build --no-cache`，如此便不会缓存。
+- exec方式会被解析为一个 JSON 数组，所以必须使用双引号而不是单引号。***exec 方式不会调用一个命令 shell***，所以也就不会继承相应的变量，如`RUN [ "echo", "$HOME" ]`这种方式是不会达到输出 HOME 变量的，正确的方式应该是用shell方式`RUN [ "sh", "-c", "echo", "$HOME" ]`,`RUN`产生的缓存在下一次构建的时候是不会失效的，会被重用，可以使用--no-cache选项，即`docker build --no-cache`，如此便不会缓存。
 
 ## 6. EXPOSE
 
