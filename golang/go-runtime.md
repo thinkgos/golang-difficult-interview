@@ -16,9 +16,17 @@
 > - [深度解密Go语言之scheduler](https://mp.weixin.qq.com/s?__biz=MzAxMTA4Njc0OQ==&mid=2651437243&idx=2&sn=8a7543527e51e3a0c58217931ced9fad&chksm=80bb6649b7ccef5f38bca80f0aaa995e461fd2578478e20ff9709f5651bb318bdcdd7c0a31d6&scene=0&xtrack=1&exportkey=AUqcLV%2FAvDQLPgNM2pNYyJg%3D&pass_ticket=edom3%2BQWJv2%2F6ag8wwGj83w98nQSUN8ex7sdZB89cFp%2FbMiUGbmDvKeH%2BLBfXRK2#rd)  
 > - [Go中goroutine是如何协作与抢占 ](https://mp.weixin.qq.com/s?__biz=MzAxMTA4Njc0OQ==&mid=2651439330&idx=3&sn=9ebccea18ceeb9e13474877c822c5ec0&chksm=80bb1e10b7cc9706432b653ea2396d9817016a291934ee2063740a844078e4d0e59d801c1a64&scene=0&xtrack=1&exportkey=AWbIFtMC8E8NLtn1zhofLWM%3D&pass_ticket=edom3%2BQWJv2%2F6ag8wwGj83w98nQSUN8ex7sdZB89cFp%2FbMiUGbmDvKeH%2BLBfXRK2#rd)
 
-#### a.  goroutine自旋占用cpu如何解决（go调用、GMP）
+#### a.  goroutine自旋占用cpu如何解决,goroutine抢占时机?
 
-#### b. goroutine抢占时机（gc 栈扫描）
+> - 同步协作式调度
+>
+> - 1. 主动用户让权：通过 `runtime.Gosched` 调用主动让出执行机会；
+>   2. 主动调度弃权：(执行栈扩张)当发生执行栈分段时，检查自身的抢占标记，决定是否继续执行；
+>
+> - 异步抢占式调度
+>
+> - 1. 被动监控抢占：当 G 阻塞在 M 上时（系统调用、channel 等），系统监控会将 P 从 M 上抢夺并分配给其他的 M 来执行其他的 G，而位于被抢夺 P 的本地调度队列中的 G 则可能会被偷取到其他 M 执行。
+>   2. 被动 GC 抢占：当需要进行垃圾回收时，为了保证不具备主动抢占处理的函数执行时间过长，导致垃圾回收迟迟不能执行而导致的高延迟，而强制停止 G 并转为执行垃圾回收。
 
 ### 3. Go的GC说一下，扫描从哪里发起？
 
@@ -28,7 +36,27 @@
 > - [Go GC 卡顿由秒级降到毫秒级以下](https://mp.weixin.qq.com/s?__biz=MzAxMTA4Njc0OQ==&mid=2651437557&idx=1&sn=9dc907498584d5aedf172d3f31649395&chksm=80bb6707b7ccee11f85443741315b1b16f1e4c8e12d289d92a9e30518730d50927bb8932dcc3&scene=0&xtrack=1&exportkey=AUkB6LIVkXa525B52UM48Kg%3D&pass_ticket=edom3%2BQWJv2%2F6ag8wwGj83w98nQSUN8ex7sdZB89cFp%2FbMiUGbmDvKeH%2BLBfXRK2#rd)
 > - [Go三色标记,混合写屏障GC模式图文全分析](https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxcheckurl?requrl=http%3A%2F%2Fmp.weixin.qq.com%2Fs%3F__biz%3DMzAxMTA4Njc0OQ%3D%3D%26mid%3D2651439356%26idx%3D2%26sn%3D264a3141ea9a4b29fe67ec06a17aeb99%26chksm%3D80bb1e0eb7cc97181b81ae731d0d425dda1e9a8d503ff75f217a0d77bd9d0eb451555cb584a0%26mpshare%3D1%26scene%3D24%26srcid%3D%26sharer_sharetime%3D1592732669979%26sharer_shareid%3Dfbafc624aa53cd09857fb0861ac2a16d%23rd&skey=%40crypt_bddcffe_a3e888b3284ca406c0faf217be8fae21&deviceid=e105128956711919&pass_ticket=SjNlB81Bpf8jMEDCdn%252BdjdMsiN39EjzpVThZXwXv5RdFrnIFYQwEYZdIbANJNfzO&opcode=2&scene=1&username=@8b5d712860b23fa22f273bc5268582db262918b9d8358a0144f1a75e6648c8ce)
 > - [通过问题学习Go GC](https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxcheckurl?requrl=http%3A%2F%2Fmp.weixin.qq.com%2Fs%3F__biz%3DMzAxMTA4Njc0OQ%3D%3D%26mid%3D2651438332%26idx%3D3%26sn%3D3ce5f863b220750997d9be774fb62c05%26chksm%3D80bb620eb7cceb18bedd9eadd72a5c162d9e109ac77761850d12f18a72aa0213f33c4c84c6e7%26mpshare%3D1%26scene%3D24%26srcid%3D%26sharer_sharetime%3D1593038314446%26sharer_shareid%3Dfbafc624aa53cd09857fb0861ac2a16d%23rd&skey=%40crypt_bddcffe_a3e888b3284ca406c0faf217be8fae21&deviceid=e105128956711919&pass_ticket=SjNlB81Bpf8jMEDCdn%252BdjdMsiN39EjzpVThZXwXv5RdFrnIFYQwEYZdIbANJNfzO&opcode=2&scene=1&username=@8b5d712860b23fa22f273bc5268582db262918b9d8358a0144f1a75e6648c8ce)
+> - [GO GC的认识](https://www.bookstack.cn/read/qcrao-Go-Questions/GC-GC.md)
+
+> 常见GC实现方法:
+>
+> - 追踪式 GC: 从根对象出发，根据对象之间的引用信息，一步步推进直到扫描完毕整个堆并确定需要保留的对象，从而回收所有可回收的对象。Go、 Java、V8 对 JavaScript 的实现等均为追踪式 GC。
+> - 引用计数式 GC: 每个对象自身包含一个被引用的计数器，当计数器归零时自动得到回收.
+>
+> GO采用无分代、不整理、并发的三色标记清扫算法
+
+> **根对象**在垃圾回收的术语中又叫做根集合，它是垃圾回收器在标记过程时最先检查的对象，包括：
+>
+> 1. **全局变量**：程序在编译期就能确定的那些存在于程序整个生命周期的变量。
+> 2. **执行栈**：每个 goroutine 都包含自己的执行栈，这些执行栈上包含栈上的变量及指向分配的堆内存区块的指针。
+> 3. **寄存器**：寄存器的值可能表示一个指针，参与计算的这些指针可能指向某些赋值器分配的堆内存区块。
+
 #### a. Gc触发时机
+
+> 1. **主动触发**，通过调用 runtime.GC 来触发 GC，此调用阻塞式地等待当前 GC 运行完毕。
+> 2. **被动触发**，分为两种方式：
+>    - 使用系统监控，当超过两分钟没有产生任何 GC 时，强制触发 GC。
+>    - 使用步调（Pacing）算法，其核心思想是控制内存增长的比例。
 
 ### 4. Go的内存分配说一下
 
@@ -131,6 +159,20 @@
 #### a. Mutex几种模式
 
 > 正常模式和饥饿模式
+>
+> 加锁过程: 
+>
+> > - 如果互斥锁处于初始化状态，就会直接通过置位 `mutexLocked` 加锁；
+> > - 如果互斥锁处于 `mutexLocked` 并且在**普通模式**下工作，就会进入自旋，执行 30 次 `PAUSE` 指令消耗 CPU 时间等待锁的释放；
+> > - 如果当前 Goroutine 等待锁的时间超过了 `1ms`，互斥锁就会被切换到**饥饿模式**；
+> > - 互斥锁在正常情况下会通过 `runtime_SemacquireMutex` 方法将调用 `Lock` 的 Goroutine 切换至休眠状态，等待持有信号量的 Goroutine 唤醒当前协程；
+> > - 如果当前 Goroutine 是互斥锁上的最后一个等待的协程或者等待的时间小于 `1ms`，当前 Goroutine 会将互斥锁切换回**正常模式**.
+>
+> 解锁过程:
+>
+> - 如果互斥锁已经被解锁，那么调用 `Unlock` 会直接抛出异常；
+> - 如果互斥锁处于**饥饿模式**，会直接将锁的所有权交给队列中的下一个等待者，等待者会负责设置 `mutexLocked` 标志位；
+> - 如果互斥锁处于**普通模式**，并且没有 Goroutine 等待锁的释放或者已经有被唤醒的 Goroutine 获得了锁就会直接返回，在其他情况下回通过 `runtime_Semrelease` 唤醒对应的 Goroutine
 
 #### b. Mutex可以做自旋锁么
 
@@ -140,7 +182,7 @@
 
 > 针对读多写少情况可以使用sync.RWMutex
 >
-> **共享读锁,独占写锁**
+> **共享读锁, 独占写锁**
 
 #### d. 悲观锁和乐观锁
 
