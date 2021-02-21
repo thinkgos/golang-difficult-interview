@@ -51,10 +51,10 @@ func main() {
 package main
 
 func main() {
- var a int8 = -1
- var b int8 = -128 / a
-
- println(b)
+    var a int8 = -1
+    var b int8 = -128 / a
+    
+    println(b)
 }
 ```
 
@@ -66,10 +66,6 @@ func main() {
     var b int8 = -128 / a
 
     println(b)
-
-	var x int8 = -128
-	var y = x / -1
-	fmt.Println(y)
 }
 ```
 

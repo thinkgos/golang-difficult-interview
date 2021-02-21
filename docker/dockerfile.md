@@ -112,7 +112,6 @@ ADD hom?.txt /mydir/    # ? is replaced with any single character
 2. exec 格式: `CMD command param1 param2 (shell form)`
 3. 参数列表格式: `CMD  "param1","param2"`
 
-
 ***`CMD`指令在`Dockerfile`中只能使用一次，如果有多个,则只有最后一个会生效***。
 
 `CMD`的目的是为了在启动容器时提供一个默认的命令执行选项。**如果用户启动容器时指定了运行的命令，则会覆盖掉`CMD`指定的命令.**
@@ -126,7 +125,7 @@ ADD hom?.txt /mydir/    # ? is replaced with any single character
 2. exec格式: `ENTRYPOINT command param1 param2 (shell form)`
 
 配置容器启动后执行的命令，并且不可被 docker run 提供的参数覆盖，而`CMD`是可以被覆盖的。
-如果需要覆盖，则可以使用--entrypoint选项。
+如果需要覆盖，则可以使用`--entrypoint`选项。
 *每个 `Dockerfile` 中只能有一个`ENTRYPOINT`，当指定多个时，只有最后一个生效.*
 
 *Exec form ENTRYPOINT* 例子: 
