@@ -5,7 +5,7 @@
 > 事务是数据库的一个重要功能。所谓的事务，就是指对数据进行读写的一系列操作。事务在执行时，会提供专门的属性保证，也就是 ACID 属性:
 >
 > - `原子性（Atomicity）`
-> - ``一致性（Consistency）`
+> - `一致性（Consistency）`
 > - `隔离性（Isolation）`
 > - `持久性（Durability）`
 

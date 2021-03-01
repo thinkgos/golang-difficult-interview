@@ -13,24 +13,24 @@ syntax = "proto3";
 
 /* 查询请求*/
 message SearchRequest {
-  reserved 4, 15, 9 to 11;
-  string query = 1; // 查询
-  int32 page_number = 2;
-  int32 result_per_page = 3;
+      reserved 4, 15, 9 to 11;
+      string query = 1; // 查询
+      int32 page_number = 2;
+      int32 result_per_page = 3;
 }
 
 message SearchResponse {
-  repeated Result results = 1;
+      repeated Result results = 1;
 }
 
 message Result {
-  string url = 1;
-  string title = 2;
-  repeated string snippets = 3;
+      string url = 1;
+      string title = 2;
+      repeated string snippets = 3;
 }
 ```
 
-- 第一行定义了使用的protobuf的协议,如果不设置,则为proto2版本. 文件第一行必须非空,非注释行
+- 第一行定义了使用的`protobuf`的协议的版本,如果不设置,则为proto2版本. 文件第一行必须非空,非注释行
 
 - 采用C/C++风格的注释,即使`//`和`/**/`.
 
@@ -65,23 +65,23 @@ message Result {
 
  [scalar types](https://developers.google.cn/protocol-buffers/docs/proto3#scalar)
 
-| .proto   | Notes                                                       | C++    | Go      | Dart   |
-| :------- | :---------------------------------------------------------- | :----- | :------ | :----- |
-| double   |                                                             | double | float64 | double |
-| float    |                                                             | float  | float32 | double |
-| int32    | 使用变长编码,负数编码效率低下,如果字段可能有负数,使用sint32 | int32  | int32   | int    |
-| int64    | 使用变长编码,负数编码效率低下,如果字段可能有负数,使用sint64 | int64  | int64   | Int64  |
-| uint32   | 使用变长编码                                                | uint32 | uint32  | int    |
-| uint64   | 使用变长编码                                                | uint64 | uint64  | Int64  |
-| sint32   | 使用变长编码。有符号的整型。它们比int32编码负数效率更高     | int32  | int32   | int    |
-| sint64   | 使用变长编码。有符号的整型。它们比int64编码负数效率更高     | int64  | int64   | Int64  |
-| fixed32  | 固定4字节编码,如果值大于2^28比uint32编码效率更高            | uint32 | uint32  | int    |
-| fixed64  | 固定8字节编码,如果值大于2^68比uint32编码效率更高            | uint64 | uint64  | Int64  |
-| sfixed32 | 固定4字节                                                   | int32  | int32   | int    |
-| sfixed64 | 固定8字节                                                   | int64  | int64   | Int64  |
-| bool     |                                                             | bool   | bool    | bool   |
-| string   | utf-8或ASCII编码,长度不应超过2^32                           | string | string  | String |
-| bytes    | 包含任意的字节,长度不应超过2^32                             | string | []byte  | List   |
+| .proto     | Notes                                                       | C++    | Go      | Dart   |
+| :--------- | :---------------------------------------------------------- | :----- | :------ | :----- |
+| `double`   |                                                             | double | float64 | double |
+| `float`    |                                                             | float  | float32 | double |
+| `int32`    | 使用变长编码,负数编码效率低下,如果字段可能有负数,使用sint32 | int32  | int32   | int    |
+| `int64`    | 使用变长编码,负数编码效率低下,如果字段可能有负数,使用sint64 | int64  | int64   | Int64  |
+| `uint32`   | 使用变长编码                                                | uint32 | uint32  | int    |
+| `uint64`   | 使用变长编码                                                | uint64 | uint64  | Int64  |
+| `sint32`   | 使用变长编码。有符号的整型。它们比int32编码负数效率更高     | int32  | int32   | int    |
+| `sint64`   | 使用变长编码。有符号的整型。它们比int64编码负数效率更高     | int64  | int64   | Int64  |
+| `fixed32`  | 固定4字节编码,如果值大于2^28比uint32编码效率更高            | uint32 | uint32  | int    |
+| `fixed64`  | 固定8字节编码,如果值大于2^68比uint32编码效率更高            | uint64 | uint64  | Int64  |
+| `sfixed32` | 固定4字节                                                   | int32  | int32   | int    |
+| `sfixed64` | 固定8字节                                                   | int64  | int64   | Int64  |
+| `bool`     |                                                             | bool   | bool    | bool   |
+| `string`   | utf-8或ASCII编码,长度不应超过2^32                           | string | string  | String |
+| `bytes`    | 包含任意的字节,长度不应超过2^32                             | string | []byte  | List   |
 
 ## 三. 默认值
 
@@ -98,18 +98,18 @@ message Result {
 
 ```protobuf
 message SearchRequest {
-  string query = 1;
-  int32 page_number = 2;
-  int32 result_per_page = 3;
-  enum Corpus {
-    option allow_alias = true;
-    UNIVERSAL = 0;
-    WEB = 1;
-    IMAGES = 2;
-    LOCAL = 3;
-    AliasLocal = 3,
-  }
-  Corpus corpus = 4;
+      string query = 1;
+      int32 page_number = 2;
+      int32 result_per_page = 3;
+      enum Corpus {
+            option allow_alias = true;
+            UNIVERSAL = 0;
+            WEB = 1;
+            IMAGES = 2;
+            LOCAL = 3;
+            AliasLocal = 3,
+      }
+      Corpus corpus = 4;
 }
 ```
 
@@ -166,8 +166,8 @@ import "old.proto";
 import "google/protobuf/any.proto";
 
 message ErrorStatus {
-  string message = 1;
-  repeated google.protobuf.Any details = 2;
+      string message = 1;
+      repeated google.protobuf.Any details = 2;
 }
 ```
 
@@ -179,10 +179,10 @@ message ErrorStatus {
 
 ```protobuf
 message SampleMessage {
-  oneof test_oneof {
-    string name = 4;
-    SubMessage sub_message = 9;
-  }
+      oneof test_oneof {
+            string name = 4;
+            SubMessage sub_message = 9;
+      }
 }
 ```
 
@@ -227,7 +227,7 @@ message Open { ... }
 
 ```protobuf
 service SearchService {
-  rpc Search(SearchRequest) returns (SearchResponse);
+      rpc Search(SearchRequest) returns (SearchResponse);
 }
 ```
 

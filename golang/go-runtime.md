@@ -4,7 +4,7 @@
 
 ### 1. goroutine初始栈大小，上下文如何切换，存在哪里
 
-目前版本goroutine初始栈为2Kb.
+目前版本goroutine初始栈为`2Kb`.
 
 ### 2. GMP 
     - GMP说一下，P有多少个，G有多少个，M有多少个。系统调用的时候M会如何，网络IO的时候M会怎样。
@@ -27,20 +27,16 @@
 
 ### 3. Go的GC说一下，扫描从哪里发起？
 
-> - [图解Go中的GC系列: 第一部份](https://mp.weixin.qq.com/s?__biz=MzAxMTA4Njc0OQ==&mid=2651437947&idx=1&sn=d7a14e169e981987b06f5057af015831&chksm=80bb6589b7ccec9f94b95a6ccb600c4b145034d970956dda7649dc9044cf1dcc5272cc8affe2&scene=0&xtrack=1&exportkey=AdzVhl06fioDNlE%2BHRtXeyI%3D&pass_ticket=edom3%2BQWJv2%2F6ag8wwGj83w98nQSUN8ex7sdZB89cFp%2FbMiUGbmDvKeH%2BLBfXRK2#rd)
-> - [图解Go中的GC系列: 第二部份](https://mp.weixin.qq.com/s?__biz=MzAxMTA4Njc0OQ==&mid=2651437958&idx=2&sn=f5cc599c2da7c463ec26750cb352057c&chksm=80bb6574b7ccec6210b534c11896abb61f81f9117675feb8a70b696e850cde2a0cf936fca4b9&scene=0&xtrack=1&exportkey=AR6grO0i%2FiZTBFfm98XH1EI%3D&pass_ticket=edom3%2BQWJv2%2F6ag8wwGj83w98nQSUN8ex7sdZB89cFp%2FbMiUGbmDvKeH%2BLBfXRK2#rd)
-> - [图解Go中的GC系列: 第三部份](https://mp.weixin.qq.com/s?__biz=MzAxMTA4Njc0OQ==&mid=2651438002&idx=1&sn=5e46b5fce65ba65a0ed53256326122ed&chksm=80bb6540b7ccec56171516ba721150ab4a44117043f157e263cbaccf3ff11805bb96fb644e8e&mpshare=1&scene=24&srcid=&sharer_sharetime=1593170246959&sharer_shareid=fbafc624aa53cd09857fb0861ac2a16d&exportkey=AfVxShso5CevIkz9J3j2Wn4%3D&pass_ticket=T4fQHjtolDrea%2BsELlzD9%2FWmfCZ8iIKJmhlPwHAPSyXFhnTbYmuLBIZHvq%2FObPEH#rd)
-> - [Go GC 卡顿由秒级降到毫秒级以下](https://mp.weixin.qq.com/s?__biz=MzAxMTA4Njc0OQ==&mid=2651437557&idx=1&sn=9dc907498584d5aedf172d3f31649395&chksm=80bb6707b7ccee11f85443741315b1b16f1e4c8e12d289d92a9e30518730d50927bb8932dcc3&scene=0&xtrack=1&exportkey=AUkB6LIVkXa525B52UM48Kg%3D&pass_ticket=edom3%2BQWJv2%2F6ag8wwGj83w98nQSUN8ex7sdZB89cFp%2FbMiUGbmDvKeH%2BLBfXRK2#rd)
-> - [Go三色标记,混合写屏障GC模式图文全分析](https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxcheckurl?requrl=http%3A%2F%2Fmp.weixin.qq.com%2Fs%3F__biz%3DMzAxMTA4Njc0OQ%3D%3D%26mid%3D2651439356%26idx%3D2%26sn%3D264a3141ea9a4b29fe67ec06a17aeb99%26chksm%3D80bb1e0eb7cc97181b81ae731d0d425dda1e9a8d503ff75f217a0d77bd9d0eb451555cb584a0%26mpshare%3D1%26scene%3D24%26srcid%3D%26sharer_sharetime%3D1592732669979%26sharer_shareid%3Dfbafc624aa53cd09857fb0861ac2a16d%23rd&skey=%40crypt_bddcffe_a3e888b3284ca406c0faf217be8fae21&deviceid=e105128956711919&pass_ticket=SjNlB81Bpf8jMEDCdn%252BdjdMsiN39EjzpVThZXwXv5RdFrnIFYQwEYZdIbANJNfzO&opcode=2&scene=1&username=@8b5d712860b23fa22f273bc5268582db262918b9d8358a0144f1a75e6648c8ce)
-> - [通过问题学习Go GC](https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxcheckurl?requrl=http%3A%2F%2Fmp.weixin.qq.com%2Fs%3F__biz%3DMzAxMTA4Njc0OQ%3D%3D%26mid%3D2651438332%26idx%3D3%26sn%3D3ce5f863b220750997d9be774fb62c05%26chksm%3D80bb620eb7cceb18bedd9eadd72a5c162d9e109ac77761850d12f18a72aa0213f33c4c84c6e7%26mpshare%3D1%26scene%3D24%26srcid%3D%26sharer_sharetime%3D1593038314446%26sharer_shareid%3Dfbafc624aa53cd09857fb0861ac2a16d%23rd&skey=%40crypt_bddcffe_a3e888b3284ca406c0faf217be8fae21&deviceid=e105128956711919&pass_ticket=SjNlB81Bpf8jMEDCdn%252BdjdMsiN39EjzpVThZXwXv5RdFrnIFYQwEYZdIbANJNfzO&opcode=2&scene=1&username=@8b5d712860b23fa22f273bc5268582db262918b9d8358a0144f1a75e6648c8ce)
 > - [GO GC的认识](https://www.bookstack.cn/read/qcrao-Go-Questions/GC-GC.md)
+> - [Go三色标记,混合写屏障GC模式图文全分析](https://studygolang.com/articles/27243?fr=sidebar)
+> - [图解Golang的GC算法](https://www.jianshu.com/p/eb6b3aff9ca5?from=singlemessage)
 
 > 常见GC实现方法:
 >
 > - **追踪式 GC**: 从根对象出发，根据对象之间的引用信息，一步步推进直到扫描完毕整个堆并确定需要保留的对象，从而回收所有可回收的对象。Go、 Java、V8 对 JavaScript 的实现等均为追踪式 GC。
 > - **引用计数式 GC**: 每个对象自身包含一个被引用的计数器，当计数器归零时自动得到回收.
 >
-> GO采用无分代、不整理、并发的三色标记清扫算法.
+> **GO采用无分代、不整理、并发的三色标记清扫算法.**
 
 > **根对象**在垃圾回收的术语中又叫做**根集合**，它是垃圾回收器在标记过程时最先检查的对象，包括：
 >
@@ -142,7 +138,8 @@
 > - [深度解密Go语言之反射](https://mp.weixin.qq.com/s?__biz=MzAxMTA4Njc0OQ==&mid=2651436469&idx=1&sn=a89a587e7bc5f3b43c0f97273d85b858&chksm=80bb6b47b7cce251e4dc2f5b12cb60cb70879e610a22e7ad57f08f05755f31920db6de956d6c&scene=0&xtrack=1&exportkey=AaAtrtVLh71R8THsVitTQyA%3D&pass_ticket=edom3%2BQWJv2%2F6ag8wwGj83w98nQSUN8ex7sdZB89cFp%2FbMiUGbmDvKeH%2BLBfXRK2#rd)
 
 ### 12. sync.pool是如何实现的
-> [深度解密Go语言之sync.Pool](https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxcheckurl?requrl=http%3A%2F%2Fmp.weixin.qq.com%2Fs%3F__biz%3DMzAxMTA4Njc0OQ%3D%3D%26mid%3D2651439265%26idx%3D4%26sn%3Dcb6dac61b2cae63e47af7b8207c03744%26chksm%3D80bb1e53b7cc97454ff53bf851e72f00c33a96883cec939bfcda4c821cb4ede10e9bac95c8bd%26mpshare%3D1%26scene%3D24%26srcid%3D%26sharer_sharetime%3D1592736314727%26sharer_shareid%3Dfbafc624aa53cd09857fb0861ac2a16d%23rd&skey=%40crypt_bddcffe_a3e888b3284ca406c0faf217be8fae21&deviceid=e105128956711919&pass_ticket=SjNlB81Bpf8jMEDCdn%252BdjdMsiN39EjzpVThZXwXv5RdFrnIFYQwEYZdIbANJNfzO&opcode=2&scene=1&username=@8b5d712860b23fa22f273bc5268582db262918b9d8358a0144f1a75e6648c8ce)
+> [深入浅出sync.Pool使用姿势篇](https://mp.weixin.qq.com/s?__biz=MzAxMTA4Njc0OQ==&mid=2651445612&idx=3&sn=4fa1acce4fb10fab7611280d151c1f3a&chksm=80bb079eb7cc8e88cab92133127a4e5cf5ac8e9b54cc3dc3bf84d9c3c4d956f0d38f3d7288b7&mpshare=1&scene=1&srcid=03017pB0oyJcF6oj1iBLFFfg&sharer_sharetime=1614562522328&sharer_shareid=fbafc624aa53cd09857fb0861ac2a16d&exportkey=Ac5IW8Ma93uqb783n2JfnF4%3D&pass_ticket=ll15823uu8mhVAL4yECcmDsxKIBjxWVnXv%2FANTvNoR%2FAiFgnkMnfxzcU2XP6YYtZ&wx_header=0#rd)  
+> [sync.Pool源码级原理剖析](https://mp.weixin.qq.com/s?__biz=Mzg3NTU3OTgxOA==&mid=2247487157&idx=1&sn=231af45701885f70e40fbf013f032192&chksm=cf3e1e70f8499766622ccf8c204e6a5ee667c70372a530e9d3d77ed4cd54be8b257d9efb65e2&mpshare=1&scene=1&srcid=0301LjqwhGJngNH3rrnpxYeO&sharer_sharetime=1614562583650&sharer_shareid=fbafc624aa53cd09857fb0861ac2a16d&exportkey=AWqCypMqymdCTksPWP5Zpu4%3D&pass_ticket=ll15823uu8mhVAL4yECcmDsxKIBjxWVnXv%2FANTvNoR%2FAiFgnkMnfxzcU2XP6YYtZ&wx_header=0#rd)
 
 ### 13. Go select是怎么用的，具体如何实现的？
 

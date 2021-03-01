@@ -55,7 +55,7 @@ Bitmap 提供了 GETBIT/SETBIT 操作，使用一个偏移值 offset 对 bit 数
 
 ## 4. 基数统计
 
-基数统计。基数统计就是指统计一个集合中不重复的元素个数
+基数统计就是指统计一个集合中不重复的元素个数
 
 hash和set集合都可以实现,但HyperLogLog更省内存
 
