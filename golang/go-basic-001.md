@@ -7,21 +7,23 @@
 **问题: 代码输出什么?**  
 [代码](src/go-basic-c0001)
 
+[embedmd]:# (src/go-basic-c0001/main.go go)
 ```go
 package main
 
 import "fmt"
 
+// `defer` 和 `panic`
 func main() {
-    defer_call()
+	defer_call()
 }
 
-func defer_call()  {
-    defer func() {fmt.Println("打印前")}()
-    defer func() {fmt.Println("打印中")}()
-    defer func() {fmt.Println("打印后")}()
+func defer_call() {
+	defer func() { fmt.Println("打印前") }()
+	defer func() { fmt.Println("打印中") }()
+	defer func() { fmt.Println("打印后") }()
 
-    panic("触发异常")
+	panic("触发异常")
 }
 ```
 **解答**:
@@ -41,30 +43,29 @@ panic: 触发异常
 
 [代码](src/go-basic-c0002)
 
+[embedmd]:# (src/go-basic-c0002/main.go go)
 ```go
 package main
 
-import (
- "fmt"
-)
+import "fmt"
 
 func main() {
- a := [2]int{5, 6}
- b := [2]int{5, 6}
- 
- // ①
- if a == b {
-  fmt.Println("equal")
- } else {
-  fmt.Println("not equal")
- }
+	a := [2]int{5, 6}
+	b := [2]int{5, 6}
 
- // ②
- if a[:] == b[:] {
-  fmt.Println("equal")
- } else {
-  fmt.Println("not equal")
- }
+	// ①
+	if a == b {
+		fmt.Println("equal")
+	} else {
+		fmt.Println("not equal")
+	}
+
+	// ②
+	// if a[:] == b[:] {
+	// 	fmt.Println("equal")
+	// } else {
+	// 	fmt.Println("not equal")
+	// }
 }
 ```
 
@@ -85,19 +86,18 @@ func main() {
 **问题: 代码输出什么?** 
 [代码](src/go-basic-c0003)
 
+[embedmd]:# (src/go-basic-c0003/main.go go)
 ```go
 package main
 
-import "fmt"
-
 func main() {
-    var ch chan int
-    select {
-    case v, ok := <-ch:
-        println(v, ok)
-    default:
-        println("default") 
-    }
+	var ch chan int
+	select {
+	case v, ok := <-ch:
+		println(v, ok)
+	default:
+		println("default")
+	}
 }
 ```
 
@@ -116,6 +116,8 @@ func main() {
 
 **问题: 代码输出什么?** 
 [代码](src/go-basic-c0004)
+
+[embedmd]:# (src/go-basic-c0004/main.go go)
 ```go
 package main
 
@@ -151,20 +153,22 @@ func main() {
 
 **问题: 代码输出什么?** 
 [代码](src/go-basic-c0005)
+
+[embedmd]:# (src/go-basic-c0005/main.go go)
 ```go
 package main
 
-type X struct {}
+type X struct{}
 
-func (x *X) test()  {
-    println(x)
+func (x *X) test() {
+	println(x)
 }
 
 func main() {
-    var a *X
-    a.test()
+	var a *X
+	a.test()
 
-    X{}.test()
+	// X{}.test()
 }
 ```
 
@@ -181,6 +185,8 @@ func main() {
 
 **问题: 代码输出什么?** 
 [代码](src/go-basic-c0006)
+
+[embedmd]:# (src/go-basic-c0006/main.go go)
 ```go
 package main
 
@@ -192,7 +198,6 @@ func main() {
 	s2 := s[4:8]
 	fmt.Println(len(s2))
 }
-
 ```
 
 **解答**: 
@@ -210,33 +215,34 @@ func main() {
 
 **问题: 代码输出什么?** 
 [代码](src/go-basic-c0007)
+
+[embedmd]:# (src/go-basic-c0007/main.go go)
 ```go
 package main
 
-import (
- "fmt"
-)
+import "fmt"
+
 type N int
 
-func (n N) test(){
-    fmt.Println(n)
+func (n N) test() {
+	fmt.Println(n)
 }
 
-func main()  {
-    var n N = 10
-    p := &n
+func main() {
+	var n N = 10
+	p := &n
 
-    n++
-    f1 := n.test
+	n++
+	f1 := n.test
 
-    n++
-    f2 := p.test
+	n++
+	f2 := p.test
 
-    n++
-    fmt.Println(n)
+	n++
+	fmt.Println(n)
 
-    f1()
-    f2()
+	f1()
+	f2()
 }
 ```
 
@@ -255,12 +261,12 @@ func main()  {
 
 **问题: 代码输出什么?** 
 [代码](src/go-basic-c0008)
+
+[embedmd]:# (src/go-basic-c0008/main.go go)
 ```go
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 type N int
 
@@ -299,14 +305,16 @@ func main() {
 
 **问题: 代码输出什么?** 
 [代码](src/go-basic-c0009)
+
+[embedmd]:# (src/go-basic-c0009/main.go go)
 ```go
 package main
 
 func main() {
 	x := make([]int, 2, 10)
 	_ = x[6:10]
-	_ = x[6:]
 	_ = x[2:]
+	_ = x[6:]
 }
 ```
 
@@ -322,6 +330,7 @@ func main() {
 
 **问题: 代码输出什么?** 
 
+[embedmd]:# (src/go-basic-c0010/main.go go)
 ```go
 package main
 
