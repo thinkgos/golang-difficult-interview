@@ -2,6 +2,8 @@
 
 # influxdb
 
+> [influxdb中文](https://www.hellodemos.com/hello-influxdb/influxdb-demos.html)
+
 ## 一. 名词解释
 
 | 名词          | 解释       |
