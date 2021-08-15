@@ -149,7 +149,7 @@
         - context了解吗，怎么用的，如何实现的？
     - 并发原语
 > - [channel ](#9. channel)
-> - [context]()  
+> - [深度解密go语言之context](https://studygolang.com/articles/21094)
 > - [WaitGroup]()  
 > - [Golang 并发编程之同步原语](https://mp.weixin.qq.com/s?__biz=MzUzNTY5MzU2MA==&mid=2247484379&idx=1&sn=1a2abc6f639a34e62f3a5a0fcd774a71&chksm=fa80d24ccdf75b5a70d45168ad9e3a55dd258c1dd57147166a86062ee70d909ff1e5b0ba2bcb&mpshare=1&scene=24&srcid=0505AFXvMENOsYGRyuReUgg6&sharer_sharetime=1588660556807&sharer_shareid=fbafc624aa53cd09857fb0861ac2a16d&exportkey=AWReVUbhJey74WnVZJKh7o0%3D&pass_ticket=edom3%2BQWJv2%2F6ag8wwGj83w98nQSUN8ex7sdZB89cFp%2FbMiUGbmDvKeH%2BLBfXRK2#rd)
 > - [译文 - Go高级并发](https://mp.weixin.qq.com/s?__biz=MzA4ODg0NDkzOA==&mid=2247487782&idx=1&sn=7dd6134073b75e226f19f9586a5cc430&chksm=9022aec3a75527d5511e2af98026074c61ef52093339d2e0f43159f5eb41f4db50ed8523b9bd&mpshare=1&scene=24&srcid=0429ILG6qj9iodwnNrkMS7Or&sharer_sharetime=1588172711436&sharer_shareid=fbafc624aa53cd09857fb0861ac2a16d&exportkey=AVBkAkzF5TwXF9RaQIygd0g%3D&pass_ticket=edom3%2BQWJv2%2F6ag8wwGj83w98nQSUN8ex7sdZB89cFp%2FbMiUGbmDvKeH%2BLBfXRK2#rd)
